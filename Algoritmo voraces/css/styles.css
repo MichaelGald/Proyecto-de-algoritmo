@@ -4,21 +4,6 @@ body{
     margin: 0;
     padding: 0;
 }
-.container{
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.titulo{
-    text-align: center;
-}
-.menu{
-    text-align: center;
-}
-#descricion{
-    background-color: white;
-    border-radius: 20px;
+.container-fluid{
+    align-items: center;
 }
