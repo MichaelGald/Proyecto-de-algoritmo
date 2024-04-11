@@ -7,77 +7,88 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="bootstrap-5.3/css/bootstrap.min.css">
 </head>
+<style>
+    nav, .offcanvas{
+        background-color: #1e293b;
+    }
+    .navbar-toggler{
+        border: none;
+    }
+    .navbar-toggler:focus{
+        outline: none;
+        box-shadow: none;
+    }
+    @media(max-width:769px){
+        .navbar-nav > li:hover{
+            background-color: #0dcaf0;
+        }
+    }
+</style>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <!--Menu start-->
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Algoritmo Voraces</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a href="" class="navbar-brand text-info fw-semibold fs-4">Algoritmo Voraces</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> 
+    <!--Offcamvas-->
+        <section class="offcanvas offcanvas-start" id="menuLateral" tabindex="-1" >
+            <div class="offcanvas-header" data-bs-theme="dark">
+                <h5 class="offcanvas-title text-info">Algoritmo Voraces</h5>
+                <button class="btn-close" type="button" aria-label="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column justify-content-between px-0">
+                <ul class="navbar-nav fs-7 justify-content-evenly">
+                    <li class="nav-item p-3 py-md-1"><a href="index.html" class="nav-link">Menu</a></li>
+                    <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo Mochila</a></li>
+                    <li class="nav-item p-3 py-md-1"><a href="algotimomoneda.html" class="nav-link">Algoritmo Moneda</a></li>
+                    <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo knapsack problem</a></li>
+                    <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo job scheduling</a></li>
+                    <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo set covering</a></li>
+
+                </ul>
+            </div>
+        </section>
+        <!--Termina offcamvas-->
     </div>
 </nav>
-<div class="">
     <div class="row mt-3 mb-1">
-        <aside class="col-2" style="border-right: solid 2px gray;">
-            <h3 class="fs-5 text-gray fw-light">Menu</h3>
-            <hr>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-black active" aria-current="page" href="index.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-body-secondary" href="algoritmomochila.html">Mochila</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-body-secondary" href="algotimomoneda.html">Moneda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-body-secondary" href=""></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-body-secondary" href=""></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-body-secondary" href=""><strong></strong></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-body-secondary" href=""></a>
-                </li>
-            </ul>
-        </aside>
         <!-- Fin del bloque izquierdo -->
         <main class="container col-10">
             <div class="row">
                 <div class="col-12 p-4 ">
-
-                     <!-- bloque  -->
+                     <!-- bloque 1 -->
                     <section class="mb-4">
-                        <h3 class="mb-2"></h3>
-                        <hr>
-                        <p></p>
-                                la lasjna  annau akkjag 
-                        <p></p>  
-
-                    </section>
-                    <!--  -->
-
-                    <section class="mt-4">
-                        <h3 class="mb-2 mt-4"></h3>
+                        <h1 class="mb-2">¿Que es un algoritmo voraz?</h1>
                         <hr>
                         <p>
-              
+                            En ciencias de la computación, un algoritmo voraz (también conocido como goloso, ávido, devorador o greedy) 
+                            es una estrategia de búsqueda por la cual se sigue una heurística consistente en elegir la opción óptima en 
+                            cada paso local con la esperanza de llegar a una solución general óptima. Este esquema algorítmico es el que
+                            menos dificultades plantea a la hora de diseñar y comprobar su funcionamiento. Normalmente se aplica a los 
+                            problemas de optimización.
                         </p>
-                        
                     </section>
-                    
-                        
-                </div>
-                
+                    <!--bloque 2  -->
+                    <section class="mt-4">
+                        <h2 class="mb-2 mt-4">Ventajas y desventajas</h2>
+                        <hr>
+                        <h3 class="mb-1 mt-1">Ventajas</h3>
+                        <p> Son faciles de implementar </p>
+                        <p> Producen soluciones eficientes </p>
+                        <p> A veces encuentran la solucion optima  </p>
+                        <h4 class="mb-1 mt-1">Desventajas</h4>
+                        <p> No todos los problemas de optimizacion son resolubles con algoritmos
+                            voraces </p>
+                        <p> La busqueda de un optimo local no implica encontrar un optimo global </p>
+                        <p> Dificultad de encontrar la funcion de seleccion que garantice la eleccion
+                            optima</p> 
+                    </section>  
+                </div>          
             </div>
         </main>
     </div>
-</div>
-
-<scrip src="bootstrap-5.3/js/bootstrap.min.js"></script>
+<script src="bootstrap-5.3/js/bootstrap.min.js"></script>
 </body>
 </html>
