@@ -48,8 +48,25 @@
         En términos más simples, se trata de determinar la mejor combinación de elementos para 
         llevar en una mochila, considerando su valor y su peso, sin exceder la capacidad máxima de la mochila.
     </p>
+     <h1>Problema de la Mochila</h1>
+    
+    <form id="knapsack-form">
+        <label for="weights">Pesos de los objetos:</label>
+        <input type="text" id="weights" name="weights" placeholder="Separados por comas (ej. 2,3,4)">
+        <br>
+        <label for="values">Valores de los objetos:</label>
+        <input type="text" id="values" name="values" placeholder="Separados por comas (ej. 3,4,5)">
+        <br>
+        <label for="capacity">Capacidad de la mochila:</label>
+        <input type="number" id="capacity" name="capacity" min="1" value="5">
+        <br>
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div id="result"></div>
 </section>
 </div>
     <script src="bootstrap-5.3/js/bootstrap.min.js"></script>
+    <script src="js/mochila.js"></script>
 </body>
 </html>
