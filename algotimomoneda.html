@@ -40,10 +40,28 @@
         <ul>
             <h1>Algoritmo Moneda</h1>
             <a>Algoritmo Mochila</a>
+            
         </ul>
-        
+    
+        <h1>Algoritmo Voraz de Moneda</h1>
+    <label for="monto">Monto:</label>
+    <input type="number" id="monto">
+    <button onclick="calcularCambio()">Calcular Cambio</button>
 
+    <div id="denominaciones">
+        <label for="denominacion1">Denominación 1:</label>
+        <input type="number" id="denominacion1" value="1"><br>
+        <label for="denominacion2">Denominación 2:</label>
+        <input type="number" id="denominacion2" value="5"><br>
+        <label for="denominacion3">Denominación 3:</label>
+        <input type="number" id="denominacion3" value="10"><br>
+        <!-- Puedes agregar más campos de entrada según sea necesario -->
+    </div>
+
+    <div id="resultado"></div>
+        
     </div>
     <script src="bootstrap-5.3/js/bootstrap.min.js"></script>
+    <script src="js/moneda.js"></script>
 </body>
 </html>
