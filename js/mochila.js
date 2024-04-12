@@ -23,5 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
             <p>Valor máximo que se puede llevar en la mochila: ${maxValue}</p>
             <p>Objetos seleccionados: ${itemsTaken.join(", ")}</p>
         `;
+        console.log('12112');
     });
 });
