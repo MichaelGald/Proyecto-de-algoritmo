@@ -35,34 +35,32 @@
           </section>
           <!--Termina offcamvas-->
       </div>
-  </nav>
-    <div class="container">
-        <ul>
-            <h1>Algoritmo Moneda</h1>
-            <a>Algoritmo Mochila</a>
-            <h1>Algoritmo Moneda</h1>
-            <a>Algoritmo Mochila</a>
-            
-        </ul>
-    
-        <h1>Algoritmo Voraz de Moneda</h1>
-    <label for="monto">Monto:</label>
-    <input type="number" id="monto">
-    <button onclick="calcularCambio()">Calcular Cambio</button>
+</nav>
 
-    <div id="denominaciones">
-        <label for="denominacion1">Denominación 1:</label>
-        <input type="number" id="denominacion1" value="1"><br>
-        <label for="denominacion2">Denominación 2:</label>
-        <input type="number" id="denominacion2" value="5"><br>
-        <label for="denominacion3">Denominación 3:</label>
-        <input type="number" id="denominacion3" value="10"><br>
-        <!-- Puedes agregar más campos de entrada según sea necesario -->
-    </div>
-
-    <div id="resultado"></div>
-        
-    </div>
+<div class="container">
+    <ul>
+        <h1 class="m-4">Algoritmo Moneda</h1>          
+    </ul>
+        <div class="row">
+            <div class="col-6 mx-auto bg-light rounded-5">
+                <h2 class="text-center  m-4">Algoritmo Voraz de Moneda</h2>
+                <div class="col-12 text-center d-flex justify-content-center align-items-center">
+                    <label for="monto" class="m-1">Monto:</label>
+                    <input type="number" id="monto" class="m-1">
+                    <button onclick="calcularCambio()" class="btn btn-success m-1">Calcular Cambio</button>
+                </div>
+                <div id="denominaciones" class="col-12 text-center m-2">
+                    <label for="denominacion1" class="m-3">Denominación 1:</label>
+                    <input type="number" id="denominacion1" value="1" class="rounded"><br>
+                    <label for="denominacion2" class="m-3">Denominación 2:</label>
+                    <input type="number" id="denominacion2" value="5" class="rounded"><br>
+                    <label for="denominacion3" class="m-3">Denominación 3:</label>
+                    <input type="number" id="denominacion3" value="10" class="rounded"><br>
+                </div>
+                <div id="resultado" class="text-center"></div>
+            </div>     
+        </div>
+</div>
     <script src="bootstrap-5.3/js/bootstrap.min.js"></script>
     <script src="js/moneda.js"></script>
 </body>

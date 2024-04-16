@@ -39,5 +39,3 @@ function calcularCambio() {
         </ul>
     `;
 }
-
-const sii = "";
