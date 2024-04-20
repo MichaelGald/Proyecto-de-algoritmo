@@ -20,3 +20,10 @@ nav, .offcanvas{
         background-color: #0dcaf0;
     }
 }
+.imagen-knapsack-problem {
+    display: flex;
+    align-items: center; 
+}
+.imagen-knapsack-problem {
+    margin-right: 20px; 
+}
