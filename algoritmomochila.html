@@ -37,35 +37,133 @@
       </div>
   </nav>
   <div class="container">
-  <section class="mb-4 mt-1">
+  <section class="mb-4 mt-4">
     <h1 class="mb-2 mt-1">knapsack problem</h1>
     <hr>
     <h2 class="mb-1 mt-1">¿Que es el algoritmo knapsack problem?</h2>
-    <p>
-        El problema de la mochila, o problema de la mochila (en inglés, knapsack problem),
+    <p class="text-justify">
+        El problema de la mochila (en inglés, knapsack problem),
         es un problema clásico de optimización combinatoria que busca maximizar el valor total 
         de objetos que pueden ser incluidos en una mochila, dadas ciertas restricciones de peso. 
         En términos más simples, se trata de determinar la mejor combinación de elementos para 
         llevar en una mochila, considerando su valor y su peso, sin exceder la capacidad máxima de la mochila.
     </p>
-     <h1>Problema de la Mochila</h1>
-    
-    <form id="knapsack-form">
-        <label for="weights">Pesos de los objetos:</label>
-        <input type="text" id="weights" name="weights" placeholder="Separados por comas (ej. 2,3,4)">
-        <br>
-        <label for="values">Valores de los objetos:</label>
-        <input type="text" id="values" name="values" placeholder="Separados por comas (ej. 3,4,5)">
-        <br>
-        <label for="capacity">Capacidad de la mochila:</label>
-        <input type="number" id="capacity" name="capacity" min="1" value="5">
-        <br>
-        <button type="submit">Calcular</button>
-    </form>
+    </section>
+    <section class="mb-4 mt-4">
+        <h3 class="mb-1 mt-1">¿Cómo funciona knapsack problem?</h3>
+        <p class="text-justify">      
+            El algoritmo de la mochila (knapsack problem) voraz funciona siguiendo un enfoque codicioso para seleccionar elementos que maximicen el valor 
+            total de la mochila sin exceder su capacidad máxima. Aquí te explico cómo funciona paso a paso:
+        </p>
+        <ol>
+            <li>Ordena los elementos según su relación valor-peso, de mayor a menor.</li>
+            <li>Inicializa una mochila vacía y un valor total en cero.</li>
+            <li>Para cada elemento en orden:</li>
+            <ul>
+                <li>
+                    Si el elemento cabe en la mochila:
+                    <ul>
+                        <li>Agrega el elemento a la mochila.</li>
+                        <li>Actualiza el valor total.</li>
+                    </ul>
+                </li>
+                <li>
+                    Si el elemento no cabe en la mochila, pasa al siguiente elemento.
+                </li>
+            </ul>
+            <li>Devuelve el contenido de la mochila y el valor total.</li>
+        </ol>
+        <p class="text-justify">
+            El algoritmo de la mochila (knapsack problem) voraz no garantiza una solución óptima en todos los casos, ya que no considera todas las posibles combinaciones de elementos.
+            Sin embargo, en muchos casos, produce resultados aceptables y es más eficiente computacionalmente en comparación con otros enfoques más exhaustivos como 
+            la programación dinámica.
+        </p>        
+    </section>
+    <section class="mb'4 mt'4">
+        <h3 class="mb-1 mt-1">Ejemplo de knapsack problem</h3>
+        <p class="text-justify">
+            Supongamos que tienes una mochila con una capacidad máxima de 15 kilogramos y te encuentras en una tienda de campaña con 
+            varios artículos que puedes llevar contigo. Cada artículo tiene un valor asociado y un peso, y tu objetivo es maximizar 
+            el valor total de los artículos que puedes llevar en tu mochila sin exceder su capacidad máxima.
+         </p>
+            <img class="align-content-center" src="img/Knapsack.svg.png" alt="Imagen knapsack problem ejemplo" width="300" height="250">
+          <p class="text-justify">
+            El algoritmo voraz seleccionará los artículos de la siguiente manera:
+          </p>
+        </p>
+        <ol>
+            <li>Calculamos la densidad de cada artículo (valor por unidad de peso):</li>
+            <ul>
+                Ratio de primer articulo = 4/12 = 0.33
+            </ul>
+            <ul>
+                Ratio de segundo articulo = 2/2 = 1
+            </ul>
+            <ul>
+                Ratio de tercer articulo = 2/1 = 2
+            </ul>
+            <ul>
+                Ratio de cuarto articulo = 1/1 = 1
+            </ul>
+            <ul>
+                Ratio de quinto articulo = 10/4 = 2.5
+            </ul>
+            <li>Ordenamos los artículos según su densidad en orden decreciente:</li>
+            <ul>
+                El quito articulo de = 2.5
+            </ul>
+            <ul>
+                El tercer articulo de = 2
+            </ul>
+            <ul>
+               El segundo articulo de = 1
+            </ul>
+            <ul>
+                El cuarto articulo de = 1
+            </ul>
+            <ul>
+                El primer articulo de = 0.33
+            </ul>
+            <li>Comenzamos a llenar la mochila seleccionando los artículos en ese orden,
+                 mientras que la capacidad de la mochila lo permita:</li>
+                 <ul>Empezamos con el quinto artículo (ratio = 2.5, peso = 4), 
+                    ya que es el de mayor densidad y aún cabe en la mochila. Después,
+                    añadimos el tercer artículo (ratio = 2, peso = 1) y el segundo artículo (ratio= 1, peso = 2)
+                    ya que todavía tenemos capacidad. Finalmente, agregamos el cuarto artículo (ratio = 1, peso = 1) 
+                    para llenar la mochila completamente.</ul>
+        </ol>
+        <p class="text-justify">
+            <p>
+            Como vemos en total peso de la mochila es de 8, pero aunque el primer artículo 
+            tiene un peso relativamente alto de 12, su ratio de valor por unidad de peso es el más bajo de todos
+            los artículos disponibles (0.33), lo que significa que su valor no compensa el peso que aporta. 
+            Por lo tanto, no es seleccionado para llenar la mochila en primer lugar, sino que se priorizan los 
+            artículos con ratios más altos que proporcionan más valor por unidad de peso.
+            </p>
+        </section>
+    <section class="mb-4 mt-4">
+     <h3 class="mb-1 mt-1">Problema de la Mochila</h3>
+     <p class="text-justify">En este apartado pobra interacturar sobre el algoritmo mochila, una vez que se han ingresado los datos, el algoritmo de la mochila 
+        puede ser ejecutado para determinar la combinación óptima de objetos que maximice el valor total sin exceder la capacidad de peso de la mochila. </p>
+<form id="knapsack-form" class="mt-4">
+    <div class="mb-3">
+        <label for="peso" class="form-label">Pesos de los objetos:</label>
+        <input type="text" id="peso" name="peso" class="form-control" placeholder="Separados por comas (ej. 2,3,4)">
+    </div>
+    <div class="mb-3">
+        <label for="valor" class="form-label">Valores de los objetos:</label>
+        <input type="text" id="valor" name="valor" class="form-control" placeholder="Separados por comas (ej. 3,4,5)">
+    </div>
+    <div class="mb-3">
+        <label for="capacidad" class="form-label">Capacidad de la mochila:</label>
+        <input type="number" id="capacidad" name="capacidad" class="form-control" min="1" value="0">
+    </div>
+    <button type="submit" class="btn btn-success">Calcular</button>
+</form>
 
-    <div id="result"></div>
-</section>
-</div>
+    <div id="resultado">Resultado</div>
+    </section>
+    </div>
     <script src="bootstrap-5.3/js/bootstrap.min.js"></script>
     <script src="js/mochila.js"></script>
 </body>
