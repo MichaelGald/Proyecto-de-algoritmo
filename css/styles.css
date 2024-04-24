@@ -20,17 +20,13 @@ nav, .offcanvas{
         background-color: #0dcaf0;
     }
 }
-<<<<<<< HEAD
 
-.color-principal{
+.color-principal {
     background-color: #1e293b;
 }
-=======
+
 .imagen-knapsack-problem {
     display: flex;
-    align-items: center; 
+    align-items: center;
+    margin-right: 20px;
 }
-.imagen-knapsack-problem {
-    margin-right: 20px; 
-}
->>>>>>> 0d066e103afc4c97bc37e7ee2e5912f8e74d02dc
