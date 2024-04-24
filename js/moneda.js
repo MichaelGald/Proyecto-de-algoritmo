@@ -25,10 +25,6 @@ function denominaciones() {
     ];
 }
 
-function validarDatos() {
-    return !isNaN(valor);
-}
-
 function calcularCambio() {
     denominaciones();
 
