@@ -36,28 +36,24 @@
         <!--Termina offcamvas-->
     </div>
 </nav>
-       <div class="container ">
+       <div class="container">
         <section class="mb-4 mt-4">
-            <h1>problema de programación de trabajo</h1>
-            <form id="actividades-form">
+            <h1>Asignación de Actividades a Trabajadores</h1>
+            <form id="actividades-form"> <!-- Agregamos un ID al formulario -->
                 <label for="num-trabajadores">Número de Trabajadores:</label>
                 <input type="number" id="num-trabajadores" min="1" value="1">
                 <br>
-                <div id="actividades-inputs"></div>
-                <button type="button" id="agregar-actividad">Agregar Actividad</button>
-                <button type="submit">Enviar</button>
+                <label for="num-actividades">Número de Actividades:</label>
+                <input type="number" id="num-actividades" min="1" value="1">
+                <br>
+                <button type="button" id="generar-tabla" class="btn btn-primary">Generar Tabla</button>
+                <div id="tabla-actividades"></div>
+                <div id="tabla-resultados"></div>
             </form>
-        </div>
-        <div id="resultados" style="display: none;">
-            <h2>Resultados:</h2>
-            <ul id="resultado-inicio-primero"></ul>
-            <ul id="resultado-fin-primero"></ul>
-            <ul id="resultado-duracion-mas-corta"></ul>
-            <ul id="resultado-menos-conflictos"></ul>
-        </div>
-            <div id="resultado"></div>
+            <div id="boton-enviar-horas"></div>
+            <div id="asignaciones-container"></div>
         </section>
-       </div>
+    </div>
        <footer class="color-principal" id="tempaltemo_footer">
         <div class="container">
             <div class="row">

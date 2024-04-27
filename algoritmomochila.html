@@ -47,37 +47,35 @@
         En términos más simples, se trata de determinar la mejor combinación de elementos para 
         llevar en una mochila, considerando su valor y su peso, sin exceder la capacidad máxima de la mochila.
     </p>
+    <p class="text-justify">      
+        El algoritmo de la mochila (knapsack problem) voraz funciona siguiendo un enfoque codicioso para seleccionar elementos que maximicen el valor 
+        total de la mochila sin exceder su capacidad máxima. Aquí te explico cómo funciona paso a paso:
+    </p>
+    <ol>
+        <li>Ordena los elementos según su relación valor-peso, de mayor a menor.</li>
+        <li>Inicializa una mochila vacía y un valor total en cero.</li>
+        <li>Para cada elemento en orden:</li>
+        <ul>
+            <li>
+                Si el elemento cabe en la mochila:
+                <ul>
+                    <li>Agrega el elemento a la mochila.</li>
+                    <li>Actualiza el valor total.</li>
+                </ul>
+            </li>
+            <li>
+                Si el elemento no cabe en la mochila, pasa al siguiente elemento.
+            </li>
+        </ul>
+        <li>Devuelve el contenido de la mochila y el valor total.</li>
+    </ol>
+    <p class="text-justify">
+        El algoritmo de la mochila (knapsack problem) voraz no garantiza una solución óptima en todos los casos, ya que no considera todas las posibles combinaciones de elementos.
+        Sin embargo, en muchos casos, produce resultados aceptables y es más eficiente computacionalmente en comparación con otros enfoques más exhaustivos como 
+        la programación dinámica.
+    </p>        
     </section>
-    <section class="mb-4 mt-4">
-        <h3 class="mb-1 mt-1">¿Cómo funciona knapsack problem?</h3>
-        <p class="text-justify">      
-            El algoritmo de la mochila (knapsack problem) voraz funciona siguiendo un enfoque codicioso para seleccionar elementos que maximicen el valor 
-            total de la mochila sin exceder su capacidad máxima. Aquí te explico cómo funciona paso a paso:
-        </p>
-        <ol>
-            <li>Ordena los elementos según su relación valor-peso, de mayor a menor.</li>
-            <li>Inicializa una mochila vacía y un valor total en cero.</li>
-            <li>Para cada elemento en orden:</li>
-            <ul>
-                <li>
-                    Si el elemento cabe en la mochila:
-                    <ul>
-                        <li>Agrega el elemento a la mochila.</li>
-                        <li>Actualiza el valor total.</li>
-                    </ul>
-                </li>
-                <li>
-                    Si el elemento no cabe en la mochila, pasa al siguiente elemento.
-                </li>
-            </ul>
-            <li>Devuelve el contenido de la mochila y el valor total.</li>
-        </ol>
-        <p class="text-justify">
-            El algoritmo de la mochila (knapsack problem) voraz no garantiza una solución óptima en todos los casos, ya que no considera todas las posibles combinaciones de elementos.
-            Sin embargo, en muchos casos, produce resultados aceptables y es más eficiente computacionalmente en comparación con otros enfoques más exhaustivos como 
-            la programación dinámica.
-        </p>        
-    </section>
+   
     <section class="mb'4 mt'4">
         <h3 class="mb-1 mt-1">Ejemplo de knapsack problem</h3>
         <p class="text-justify">
@@ -138,6 +136,67 @@
             los artículos disponibles (0.33), lo que significa que su valor no compensa el peso que aporta. 
             Por lo tanto, no es seleccionado para llenar la mochila en primer lugar, sino que se priorizan los 
             artículos con ratios más altos que proporcionan más valor por unidad de peso.
+            </p>
+        </section>
+        <section class="mb-4 mt-4">
+            <h3 class="mb-1 mt-1">Documentacion del knapsack problem</h3>
+                 <p>
+                    El enfoque voraz, aplicado a este problema, busca seleccionar los elementos de manera que,
+                    en cada paso, se maximice el valor por unidad de peso. Si bien no garantiza la solución 
+                    óptima en todos los casos, en muchas situaciones proporciona una solución aceptable con 
+                    una eficiencia computacional notablemente mejor.
+                 </p>
+                 <p>
+                    A continuación, presentamos una implementación del algoritmo de la mochila utilizando este 
+                    enfoque, acompañado de su código correspondiente:
+                 </p>
+                 <pre class="col-lg-5 rounded-2 bg-dark text-light">
+                    <code>
+     class Item {
+        constructor(weight, value) {
+            this.weight = weight;
+            this.value = value;
+            this.ratio = value / weight; 
+            }
+        }
+                    </code>
+                 </pre>
+                     <p>
+                     Esta clase <strong>Item</strong> encapsula los atributos de cada elemento, 
+                     su peso y su valor, además de calcular su ratio valor-peso.
+                    </p>
+           <pre class="col-lg-7 rounded-2 bg-dark text-light">
+             <code> 
+     function knapsack(obj, max_cost) {
+        const items = Object.entries(obj).map(([n, [c, b]]) => new Item(c, b));
+            items.sort((a, b) => b.ratio - a.ratio);
+            let totalValue = 0;
+            let remainingCapacity = max_cost;
+            const objetosEnMochila = [];
+                  
+            for (const item of items) {
+                if (remainingCapacity >= item.weight) {
+                    objetosEnMochila.push(item);
+                    totalValue += item.value;
+                    remainingCapacity -= item.weight;
+                   }
+             }
+                
+             return {
+                objetosEnMochila: objetosEnMochila, 
+                pesoMochila: max_cost - remainingCapacity,  
+                valorMochila: totalValue
+                };
+     }
+             </code>
+            </pre>
+            <p>
+                Esta función <strong>knapsack</strong> recibe dos parámetros: <em>obj</em>,
+                que es un objeto que contiene los elementos disponibles y sus respectivos pesos y valores; 
+                y <em>max_cost</em>, que representa la capacidad máxima de la mochila. Devuelve un objeto 
+                con tres propiedades: <em>objetosEnMochila</em>, que es un array de los elementos incluidos en la mochila;
+                <em>pesoMochila</em>, que es el peso total de los elementos incluidos; y <em>valorMochila</em>, que es el 
+                valor total de los elementos incluidos.
             </p>
         </section>
     <section class="mb-4 mt-4">
