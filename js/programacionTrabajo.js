@@ -1,69 +1,80 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Clase Actividad
+     /* La clase Actividad representa una actividad con un identificador, un tiempo de inicio y
+      un tiempo de fin. También tiene un método para calcular la duración de la actividad.*/
     class Actividad {
         constructor(id, inicio, fin) {
             this.id = id;
             this.inicio = inicio;
             this.fin = fin;
+            this.asignada = false; // Marcar si la actividad ya ha sido asignada
         }
-
+        
         calcularDuracion() {
             return this.fin - this.inicio;
         }
     }
 
-    // Función para asignar actividades con balance
-    function asignarActividadesConBalance(actividades, numTrabajadores) {
+   // Esta función asigna actividades a trabajadores
+    function asignarActividades(actividades, numTrabajadores) {
+        
         // Ordenar las actividades por su tiempo de inicio
         actividades.sort((a, b) => a.inicio - b.inicio);
-
-        // Inicializar un arreglo para almacenar las horas asignadas a cada trabajador
+        
+        // Inicializar los arreglos de asignaciones y horas asignadas para cada trabajador
+        const asignaciones = [];
         const horasAsignadas = new Array(numTrabajadores).fill(0);
-
-        // Inicializar un arreglo para almacenar las asignaciones de actividades
-        const asignaciones = new Array(numTrabajadores).fill([]);
-
-        // Iterar sobre todas las actividades
-        for (let i = 0; i < actividades.length; i++) {
-            const actividad = actividades[i];
-            let trabajadorActual = 0; // Índice del trabajador actual
-
-            // Encontrar al trabajador con menos horas asignadas
-            for (let j = 1; j < numTrabajadores; j++) {
-                if (horasAsignadas[j] < horasAsignadas[trabajadorActual]) {
-                    trabajadorActual = j;
-                }
-            }
-
-            // Verificar si el trabajador actual tiene espacio para más horas
-            if (horasAsignadas[trabajadorActual] + actividad.calcularDuracion() <= 8) {
-                asignaciones[trabajadorActual].push(actividad); // Asignar la actividad al trabajador actual
-                horasAsignadas[trabajadorActual] += actividad.calcularDuracion(); // Actualizar las horas asignadas al trabajador
-            }
-
-            // Reequilibrar si un trabajador tiene más de 8 horas
-            for (let j = 0; j < numTrabajadores; j++) {
-                if (horasAsignadas[j] > 8) {
-                    const exceso = horasAsignadas[j] - 8;
-                    const actividadesTrabajador = asignaciones[j];
-                    actividadesTrabajador.sort((a, b) => b.calcularDuracion() - a.calcularDuracion()); // Ordenar las actividades del trabajador por duración descendente
-                    let k = 0;
-                    while (exceso > 0 && k < actividadesTrabajador.length) {
-                        const duracionActividad = actividadesTrabajador[k].calcularDuracion();
-                        if (exceso >= duracionActividad) {
-                            exceso -= duracionActividad;
-                            horasAsignadas[j] -= duracionActividad;
-                            asignaciones[j] = actividadesTrabajador.slice(0, k); // Eliminar la actividad del trabajador
-                        }
-                        k++;
-                    }
-                }
-            }
+        for (let i = 0; i < numTrabajadores; i++) {
+            asignaciones.push([]);
         }
-
+    
+        // Iterar sobre todas las actividades
+        actividades.forEach(actividad => {
+            // Encontrar al trabajador con el menor tiempo asignado
+            let trabajador = 0;
+            let menorTiempo = horasAsignadas[0];
+            for (let i = 1; i < numTrabajadores; i++) {
+                if (horasAsignadas[i] < menorTiempo) {
+                    trabajador = i;
+                    menorTiempo = horasAsignadas[i];
+                }
+            }
+    
+            // Verificar si el trabajador tiene espacio para esta actividad
+            if (horasAsignadas[trabajador] + actividad.calcularDuracion() <= 8) {
+                // Asignar la actividad al trabajador
+                asignaciones[trabajador].push(actividad);
+                horasAsignadas[trabajador] += actividad.calcularDuracion();
+            } else {
+                // Si el trabajador no tiene espacio, marcar la actividad como no asignada
+                actividad.asignada = false;
+            }
+        });
+        
         return asignaciones;
     }
+
+// Función para identificar las actividades no asignadas
+function identificarActividadesNoAsignadas(actividades, asignaciones) {
+    const actividadesNoAsignadas = [];
+
+    // Convertir las asignaciones en un conjunto de IDs de actividades asignadas
+    const actividadesAsignadas = new Set();
+    asignaciones.forEach(trabajador => {
+        trabajador.forEach(actividad => {
+            actividadesAsignadas.add(actividad.id);
+        });
+    });
+
+    // Identificar las actividades no asignadas
+    actividades.forEach(actividad => {
+        if (!actividadesAsignadas.has(actividad.id)) {
+            actividadesNoAsignadas.push(actividad);
+        }
+    });
+
+    return actividadesNoAsignadas;
+}
 
     // Evento de clic para generar la tabla de actividades
     document.getElementById('generar-tabla').addEventListener('click', function () {
@@ -85,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Agregar el botón de enviar horas
         const botonEnviarHorasHtml = `
-            <button type="button" id="enviar-horas" class="btn btn-primary">Enviar Horas</button>
+            <button type="button" id="boton-enviar-horas" class="btn btn-primary">Enviar Horas</button>
         `;
         document.getElementById('boton-enviar-horas').innerHTML = botonEnviarHorasHtml;
     });
@@ -94,22 +105,40 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('boton-enviar-horas').addEventListener('click', enviarHoras);
 
     // Función para enviar horas
-    function enviarHoras() {
-        const numActividades = parseInt(document.getElementById('num-actividades').value);
-        const actividades = [];
-        for (let i = 1; i <= numActividades; i++) {
-            const inicio = parseInt(document.getElementById(`inicio-actividad-${i}`).value);
-            const fin = parseInt(document.getElementById(`fin-actividad-${i}`).value);
+function enviarHoras() {
+    const numActividades = parseInt(document.getElementById('num-actividades').value);
+    const actividades = [];
+
+    // Recopilar las actividades del formulario
+    for (let i = 1; i <= numActividades; i++) {
+        const inicio = parseInt(document.getElementById(`inicio-actividad-${i}`).value);
+        const fin = parseInt(document.getElementById(`fin-actividad-${i}`).value);
+
+        // Verificar si el tiempo de inicio y fin es válido
+        if (!isNaN(inicio) && !isNaN(fin) && inicio < fin) {
             actividades.push(new Actividad(i, inicio, fin));
         }
-
-        // Realizar selección de actividades
-        const numTrabajadores = parseInt(document.getElementById('num-trabajadores').value);
-        const asignaciones = asignarActividadesConBalance(actividades, numTrabajadores);
-
-        // Mostrar resultados en el DOM
-        mostrarAsignacionesEnHTML(asignaciones);
     }
+
+    // Verificar si se han ingresado todas las actividades correctamente
+    if (actividades.length !== numActividades) {
+        alert("Por favor, ingresa un tiempo de inicio válido menor que el tiempo de fin para todas las actividades.");
+        return;
+    }
+
+    // Realizar la asignación de actividades
+    const numTrabajadores = parseInt(document.getElementById('num-trabajadores').value);
+    const asignaciones = asignarActividades(actividades, numTrabajadores);
+
+    // Mostrar resultados en el DOM
+    mostrarAsignacionesEnHTML(asignaciones);
+
+    // Identificar actividades no asignadas
+    const actividadesNoAsignadas = identificarActividadesNoAsignadas(actividades, asignaciones);
+
+    // Mostrar actividades no asignadas en el DOM
+    mostrarActividadesNoAsignadas(actividadesNoAsignadas);
+}
 
     // Función para mostrar las asignaciones en HTML
     function mostrarAsignacionesEnHTML(asignaciones) {
@@ -123,4 +152,17 @@ document.addEventListener('DOMContentLoaded', function () {
             asignacionesContainer.insertAdjacentHTML('beforeend', listaActividadesHtml);
         }
     }
+    // Función para mostrar las actividades no asignadas en el DOM
+    function mostrarActividadesNoAsignadas(actividadesNoAsignadas) {
+        const actividadesNoAsignadasContainer = document.getElementById('actividades-no-asignadas');
+        actividadesNoAsignadasContainer.innerHTML = '';
+
+        if (actividadesNoAsignadas.length === 0) {
+            actividadesNoAsignadasContainer.innerHTML = '<p>No hay actividades no asignadas.</p>';
+        } else {
+            const listaActividadesHtml = actividadesNoAsignadas.map(actividad => `<p>Actividad ${actividad.id}</p>`).join('');
+            actividadesNoAsignadasContainer.innerHTML = listaActividadesHtml;
+        }
+    }
+
 });
