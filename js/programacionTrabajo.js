@@ -40,55 +40,73 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
     
-            // Verificar si el trabajador tiene espacio para esta actividad
-            if (horasAsignadas[trabajador] + actividad.calcularDuracion() <= 8) {
-                // Asignar la actividad al trabajador
-                asignaciones[trabajador].push(actividad);
-                horasAsignadas[trabajador] += actividad.calcularDuracion();
-            } else {
-                // Si el trabajador no tiene espacio, marcar la actividad como no asignada
-                actividad.asignada = false;
+             // Verificar si el trabajador tiene espacio para esta actividad
+        let superpuesta = false;
+        for (let i = 0; i < asignaciones[trabajador].length; i++) {
+            const asignada = asignaciones[trabajador][i];
+            if (!(actividad.fin <= asignada.inicio || actividad.inicio >= asignada.fin)) {
+                superpuesta = true;
+                break;
             }
-        });
-        
-        return asignaciones;
-    }
+        }
 
-// Función para identificar las actividades no asignadas
-function identificarActividadesNoAsignadas(actividades, asignaciones) {
-    const actividadesNoAsignadas = [];
-
-    // Convertir las asignaciones en un conjunto de IDs de actividades asignadas
-    const actividadesAsignadas = new Set();
-    asignaciones.forEach(trabajador => {
-        trabajador.forEach(actividad => {
-            actividadesAsignadas.add(actividad.id);
-        });
-    });
-
-    // Identificar las actividades no asignadas
-    actividades.forEach(actividad => {
-        if (!actividadesAsignadas.has(actividad.id)) {
-            actividadesNoAsignadas.push(actividad);
+        if (!superpuesta && horasAsignadas[trabajador] + actividad.calcularDuracion() <= 8) {
+            // Asignar la actividad al trabajador
+            asignaciones[trabajador].push(actividad);
+            horasAsignadas[trabajador] += actividad.calcularDuracion();
+        } else {
+            // Si el trabajador no tiene espacio o hay superposición, marcar la actividad como no asignada
+            actividad.asignada = false;
         }
     });
 
-    return actividadesNoAsignadas;
-}
+    return asignaciones;
+    }
+
+    // Función para identificar las actividades no asignadas
+    function identificarActividadesNoAsignadas(actividades, asignaciones) {
+        const actividadesNoAsignadas = [];
+
+        // Convertir las asignaciones en un conjunto de IDs de actividades asignadas
+        const actividadesAsignadas = new Set();
+        asignaciones.forEach(trabajador => {
+            trabajador.forEach(actividad => {
+                actividadesAsignadas.add(actividad.id);
+            });
+        });
+
+        // Identificar las actividades no asignadas
+        actividades.forEach(actividad => {
+            if (!actividadesAsignadas.has(actividad.id)) {
+                actividadesNoAsignadas.push(actividad);
+            }
+        });
+
+        return actividadesNoAsignadas;
+    }
 
     // Evento de clic para generar la tabla de actividades
     document.getElementById('generar-tabla').addEventListener('click', function () {
-        const actividadesContainer = document.getElementById('tabla-actividades');
+       
         const numActividades = parseInt(document.getElementById('num-actividades').value);
+        const numTrabajadores = parseInt(document.getElementById('num-trabajadores').value);
+    
+            // Validar que el número de trabajadores y el número de actividades sea un número
+        if (isNaN(numActividades) || isNaN(numTrabajadores) || numActividades <= 0 || numTrabajadores <= 0) {
+            alert("El número de trabajadores y el número de actividades deben ser números mayores que 0.");
+            return;
+        }
+
+        const actividadesContainer = document.getElementById('tabla-actividades');
         actividadesContainer.innerHTML = '';
 
         // Generar los campos de entrada para las actividades
         for (let i = 1; i <= numActividades; i++) {
             const actividadHtml = `
                 <label for="inicio-actividad-${i}">Inicio Actividad ${i}:</label>
-                <input type="number" id="inicio-actividad-${i}" min="0" value="0">
+                <input type="number" id="inicio-actividad-${i}"  placeholder="0">
                 <label for="fin-actividad-${i}">Fin Actividad ${i}:</label>
-                <input type="number" id="fin-actividad-${i}" min="0" value="0">
+                <input type="number" id="fin-actividad-${i}"  placeholder="0">
                 <br>
             `;
             actividadesContainer.insertAdjacentHTML('beforeend', actividadHtml);
@@ -96,7 +114,7 @@ function identificarActividadesNoAsignadas(actividades, asignaciones) {
 
         // Agregar el botón de enviar horas
         const botonEnviarHorasHtml = `
-            <button type="button" id="boton-enviar-horas" class="btn btn-primary">Enviar Horas</button>
+            <button type="button" id="boton-enviar-horas" class="btn btn-success">Enviar Horas</button>
         `;
         document.getElementById('boton-enviar-horas').innerHTML = botonEnviarHorasHtml;
     });
@@ -105,9 +123,9 @@ function identificarActividadesNoAsignadas(actividades, asignaciones) {
     document.getElementById('boton-enviar-horas').addEventListener('click', enviarHoras);
 
     // Función para enviar horas
-function enviarHoras() {
-    const numActividades = parseInt(document.getElementById('num-actividades').value);
-    const actividades = [];
+    function enviarHoras() {
+        const numActividades = parseInt(document.getElementById('num-actividades').value);
+        const actividades = [];
 
     // Recopilar las actividades del formulario
     for (let i = 1; i <= numActividades; i++) {
@@ -148,10 +166,15 @@ function enviarHoras() {
         for (let i = 0; i < asignaciones.length; i++) {
             const trabajador = i + 1;
             const actividadesAsignadas = asignaciones[i];
-            const listaActividadesHtml = `<p>Trabajador ${trabajador}: ${actividadesAsignadas.map(actividad => `Actividad ${actividad.id}`).join(', ')}</p>`;
-            asignacionesContainer.insertAdjacentHTML('beforeend', listaActividadesHtml);
+            if (actividadesAsignadas.length === 0) {
+                asignacionesContainer.insertAdjacentHTML('beforeend', `<p>Trabajador ${trabajador}: No hay actividades asignadas.</p>`);
+            } else {
+                const listaActividadesHtml = `<p>Trabajador ${trabajador}: ${actividadesAsignadas.map(actividad => `Actividad ${actividad.id}`).join(', ')}</p>`;
+                asignacionesContainer.insertAdjacentHTML('beforeend', listaActividadesHtml);
+            }
         }
     }
+
     // Función para mostrar las actividades no asignadas en el DOM
     function mostrarActividadesNoAsignadas(actividadesNoAsignadas) {
         const actividadesNoAsignadasContainer = document.getElementById('actividades-no-asignadas');
@@ -160,7 +183,7 @@ function enviarHoras() {
         if (actividadesNoAsignadas.length === 0) {
             actividadesNoAsignadasContainer.innerHTML = '<p>No hay actividades no asignadas.</p>';
         } else {
-            const listaActividadesHtml = actividadesNoAsignadas.map(actividad => `<p>Actividad ${actividad.id}</p>`).join('');
+            const listaActividadesHtml = actividadesNoAsignadas.map(actividad => `<p>No hay trabajador para la Actividad ${actividad.id}</p>`).join('');
             actividadesNoAsignadasContainer.innerHTML = listaActividadesHtml;
         }
     }

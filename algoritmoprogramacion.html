@@ -9,50 +9,241 @@
 </head>
 
 <body>
-    <!--Menu start-->
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container-fluid">
-    <a href="" class="navbar-brand text-info fw-semibold fs-4">Algoritmo Voraces</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
-      <span class="navbar-toggler-icon"></span>
-    </button> 
-    <!--Offcamvas-->
-        <section class="offcanvas offcanvas-start" id="menuLateral" tabindex="-1" >
-            <div class="offcanvas-header" data-bs-theme="dark">
-                <h5 class="offcanvas-title text-info">Algoritmo Voraces</h5>
-                <button class="btn-close" type="button" aria-label="offcanvas"></button>
-            </div>
-            <div class="offcanvas-body d-flex flex-column justify-content-between px-0">
-                <ul class="navbar-nav fs-7 justify-content-evenly">
-                    <li class="nav-item p-3 py-md-1"><a href="index.html" class="nav-link">Inicio</a></li>
-                    <li class="nav-item p-3 py-md-1"><a href="algotimomoneda.html" class="nav-link">Algoritmo Moneda</a></li>
-                    <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo knapsack problem</a></li>
-                    <li class="nav-item p-3 py-md-1"><a href="algoritmoprogramacion.html" class="nav-link">Algoritmo job scheduling</a></li>
-                    <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo set covering</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a href="" class="navbar-brand text-info fw-semibold fs-4">Algoritmo Voraces</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+        <span class="navbar-toggler-icon"></span>
+      </button> 
+          <section class="offcanvas offcanvas-start" id="menuLateral" tabindex="-1" style="background-color: #1e293b">
+              <div class="offcanvas-header" data-bs-theme="dark">
+                  <h5 class="offcanvas-title text-info">Algoritmo Voraces</h5>
+                  <button class="btn-close" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+                </button>
 
-                </ul>
-            </div>
-        </section>
-        <!--Termina offcamvas-->
-    </div>
+              </div>
+              <div class="offcanvas-body d-flex flex-column justify-content-between px-0 color-principal">
+                  <ul class="navbar-nav fs-7 justify-content-evenly">
+                      <li class="nav-item p-3 py-md-1"><a href="index.html" class="nav-link">Inicio</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algotimomoneda.html" class="nav-link">Algoritmo Moneda</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo knapsack problem</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algoritmoprogramacion.html" class="nav-link">Algoritmo job scheduling</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo set covering</a></li>
+  
+                  </ul>
+              </div>
+          </section>
+      </div>
 </nav>
        <div class="container">
+        <section class="mb-4  mt-4 ">
+            <h1 class="mb-2 mt-1">Job Scheduling</h1>
+            <hr>
+            <h2 class="mb-1 mt-1 ">¿Que es el algoritmo Job Scheduling?</h2>
+            <p class="text-justify">
+                El algoritmo Job Scheduling es un problema de optimización combinatoria que implica
+                asignar un conjunto de trabajos a un conjunto de recursos (como máquinas o trabajadores) 
+                durante un período de tiempo determinado. El objetivo es minimizar o maximizar alguna métrica
+                 específica, como el tiempo total de finalización de todos los trabajos o la cantidad de recursos 
+                 utilizados.
+            </p>
+            <p class="text-justify">
+                El algoritmo de Job Scheduling, cuando se aborda desde un enfoque voraz, 
+                busca maximizar la ganancia total al asignar trabajos con fechas límite y ganancias 
+                asociadas a un conjunto limitado de recursos, como tiempo o máquinas disponibles.
+            </p>
+            <p class="text-justify">
+                Este algoritmo voraz busca optimizar localmente en cada paso, tomando la mejor decisión posible en ese momento sin 
+                considerar el futuro. Aunque este enfoque puede no garantizar una solución óptima en todos los casos, a menudo produce resultados 
+                aceptables en la práctica y es eficiente en términos de tiempo de ejecución. Sin embargo, la elección de la estrategia voraz y la 
+                métrica de optimización adecuadas son cruciales para obtener resultados satisfactorios.
+            </p>
+        </section>
+
+        <section class="mb-4 mt-4 ">
+            <h2 class="mb-1 mt-1 ">¿Como funciona el algoritmo Job Scheduling?</h2>
+            <p class="text-justify">
+                El algoritmo de Job Scheduling orientado a los trabajadores implica asignar una serie de trabajos a un grupo de trabajadores durante un 
+                período de tiempo determinado. El objetivo es maximizar la eficiencia de los trabajadores y minimizar el tiempo total de finalización de todos los trabajos.
+            </p>
+            <p class="text-justify">
+                El proceso de asignación de trabajos a trabajadores puede seguir un enfoque voraz, donde se selecciona en cada paso el próximo trabajo a asignar al trabajador 
+                más adecuado en función de ciertos criterios, como la disponibilidad del trabajador y la duración del trabajo.
+            </p>
+            <p class="text-justify">
+                A continuación, se presenta una implementación simple del algoritmo de Job Scheduling orientado a los trabajadores:
+            </p>
+
+            <pre class="col-lg-5 rounded-2 bg-dark text-light text-justify"><code>
+class Actividad {
+    constructor(id, inicio, fin) {
+        this.id = id;
+        this.inicio = inicio;
+        this.fin = fin;
+        this.asignada = false; 
+    }   
+    calcularDuracion() {
+        return this.fin - this.inicio;
+    }
+}
+            </code></pre>
+            <p class="text-justify">
+                <strong>Clase Actividad:</strong> Define una clase llamada Actividad que representa una 
+                actividad con un identificador, un tiempo de inicio y un tiempo de fin. También tiene un 
+                método <code>calcularDuracion()</code> que calcula la duración de la actividad restando 
+                el tiempo de inicio del tiempo de fin.
+              </p>
+            <pre class="col-lg-8 rounded-2 bg-dark text-light text-justify"><code>    
+function asignarActividades(actividades, numTrabajadores) {               
+    actividades.sort((a, b) => a.inicio - b.inicio);
+    const asignaciones = [];
+    const horasAsignadas = new Array(numTrabajadores).fill(0);
+    
+    for (let i = 0; i < numTrabajadores; i++) {
+        asignaciones.push([]);
+    }
+                
+    actividades.forEach(actividad => {                
+        let trabajador = 0;
+        let menorTiempo = horasAsignadas[0];
+        for (let i = 1; i < numTrabajadores; i++) {
+            if (horasAsignadas[i] < menorTiempo) {
+                trabajador = i;
+                menorTiempo = horasAsignadas[i];
+            }
+        }
+                
+    let superpuesta = false;
+    for (let i = 0; i < asignaciones[trabajador].length; i++) {
+        const asignada = asignaciones[trabajador][i];
+        if (!(actividad.fin <= asignada.inicio || actividad.inicio >= asignada.fin)) {
+            superpuesta = true;
+            break;
+        }
+    }
+            
+    if (!superpuesta && horasAsignadas[trabajador] + actividad.calcularDuracion() <= 8) {                
+        asignaciones[trabajador].push(actividad);
+        horasAsignadas[trabajador] += actividad.calcularDuracion();
+    } else {
+        actividad.asignada = false;
+    }
+    });
+            
+    return asignaciones;
+}
+                            
+function identificarActividadesNoAsignadas(actividades, asignaciones) {
+    const actividadesNoAsignadas = [];            
+    const actividadesAsignadas = new Set();
+    
+    asignaciones.forEach(trabajador => {
+        trabajador.forEach(actividad => {
+            actividadesAsignadas.add(actividad.id);
+         });
+    });
+            
+    actividades.forEach(actividad => {
+        if (!actividadesAsignadas.has(actividad.id)) {
+             actividadesNoAsignadas.push(actividad);
+        }
+    });
+            
+   return actividadesNoAsignadas;
+}
+            </code></pre>
+            <p class="text-justify">
+                La función <strong>asignarActividades</strong> es la parte central del algoritmo voraz. Toma como entrada un arreglo
+                de objetos de actividad (actividades) y el número de trabajadores (numTrabajadores). El objetivo es asignar estas actividades
+                a los trabajadores de manera eficiente.
+            </p>
+            
+            <p class="text-justify">
+                Primero, las actividades se ordenan por su tiempo de inicio, lo que es crucial para garantizar una asignación coherente.
+            </p>
+            
+            <p class="text-justify">
+                Luego, se inicializan dos arreglos: <code>asignaciones</code> y <code>horasAsignadas</code>. <code>asignaciones</code> es un arreglo 
+                de arreglos donde cada elemento representa las actividades asignadas a un trabajador. <code>horasAsignadas</code> es un arreglo 
+                que rastrea el número total de horas asignadas a cada trabajador.
+            </p>
+            
+            <p class="text-justify">
+                A continuación, se itera sobre todas las actividades. Para cada actividad, se busca al trabajador con el menor tiempo asignado, 
+                lo que se hace para intentar asignar actividades de manera equilibrada entre los trabajadores.
+            </p>
+            
+            <p class="text-justify">
+                Después, se verifica si el trabajador seleccionado tiene espacio para esta actividad y si hay superposición con las actividades ya asignadas. 
+                Si el trabajador puede realizar la actividad sin exceder las 8 horas de trabajo diarias y sin superposiciones, se asigna la actividad al 
+                trabajador y se actualizan los registros de horas asignadas.
+            </p>
+            
+            <p class="text-justify">
+                Si no hay espacio para la actividad o hay superposición, se marca la actividad como no asignada.
+            </p>
+            
+            <p class="text-justify">
+                La función devuelve un arreglo <code>asignaciones</code> que contiene las asignaciones de actividades para cada trabajador. 
+                Cada elemento del arreglo <code>asignaciones</code> es otro arreglo que contiene las actividades asignadas a un trabajador en particular.
+            </p>
+        </section>
+
+        <section class="mb-4 mt-4 ">
+            <h2 class="mb-1 mt-1 ">Ejemplo de Job Scheduling</h2>
+            <p class="text-justify">
+                Supongamos que tenemos 3 trabajadores disponibles para realizar actividades durante un día. Cada trabajador tiene 8 horas disponibles. 
+                Tenemos una lista de actividades con su duración en horas. Utilizaremos un algoritmo para asignar estos trabajos a los trabajadores de manera eficiente.
+            </p>
+            <p class="text-justify">
+                En nuestra lista de actividades, tenemos:
+                    <ul>actividad 1: inicio 1 y fin 4</ul>
+                    <ul>actividad 2: inicio 2 y fin 5</ul>
+                    <ul>actividad 3: inicio 4 y fin 6</ul>
+                    <ul>actividad 4: inicio 3 y fin 9</ul>
+                    <ul>actividad 5: inicio 5 y fin 9</ul>
+            </p>
+            <p class="text-justify">
+                Nuestro objetivo es asignar estos trabajos a los 3 trabajadores de manera que maximicemos el uso del tiempo disponible de cada trabajador y minimicemos 
+                el tiempo total de finalización de todos los trabajos.
+            </p>
+             <p class="text-justify">
+                El resultado es:
+                    <ul>Trabajador 1 se le asignara actividad 1</ul>
+                    <ul>Trabajador 1 se le asignara actividad 3</ul>
+                    <ul>Trabajador 2 se le asignara actividad 2</ul>
+                    <ul>Trabajador 2 se le asignara actividad 5</ul>
+                    <ul>Trabajador 3 se le asignara actividad 4</ul>
+             </p>
+             <p class="text-justify">
+                En este punto, todos los trabajos han sido asignados a los trabajadores, maximizando el uso del tiempo disponible de cada uno. 
+                Pero ahi casos en que sobran actividades y esto es porque son muy poquitos trabajadores o muchas actividades de tiempo largo 
+                y estas actividades se mandara a las no asignadas. Ese seria como funcionara el algoritmo Job scheduling
+             </p>   
+        </section>
+
         <section class="mb-4 mt-4">
-            <h1>Asignación de Actividades a Trabajadores</h1>
-            <form id="actividades-form"> <!-- Agregamos un ID al formulario -->
-                <label for="num-trabajadores">Número de Trabajadores:</label>
-                <input type="number" id="num-trabajadores" min="1" value="1">
-                <br>
-                <label for="num-actividades">Número de Actividades:</label>
-                <input type="number" id="num-actividades" min="1" value="1">
-                <br>
-                <button type="button" id="generar-tabla" class="btn btn-primary">Generar Tabla</button>
-                <div id="tabla-actividades"></div>
-                <div id="tabla-resultados"></div>
+            <h2 class="mb-1  mt-1 ">Problema Job Schedulinga Trabajadores</h2>
+            <p> 
+                En este apartado proporciona una interfaz interactiva donde los usuarios pueden ingresar datos sobre las actividades y ver cómo se 
+                asignan a los trabajadores utilizando el algoritmo de Job Scheduling.
+            </p>
+            <form id="actividades-form"> 
+                <div class="form-group">
+                    <label for="num-trabajadores">Número de Trabajadores:</label>
+                    <input type="number" id="num-trabajadores" class="form-control" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="num-actividades">Número de Actividades:</label>
+                    <input type="number" id="num-actividades" class="form-control" min="1" value="1">
+                </div>
+                <button type="button" id="generar-tabla" class="btn btn-success">Generar Tabla</button>
             </form>
-            <div id="boton-enviar-horas"></div>
-            <div id="asignaciones-container"></div>
-            <div id="actividades-no-asignadas"></div>
+            <div id="tabla-actividades" class="mt-4"></div>
+            <div id="boton-enviar-horas" class="mt-4"></div>
+            <div id="asignaciones-container" class="mt-4"></div>
+            <div id="actividades-no-asignadas" class="mt-4"></div>
+        </div>
         </section>
     </div>
        <footer class="color-principal" id="tempaltemo_footer">
