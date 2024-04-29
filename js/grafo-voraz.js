@@ -10,14 +10,23 @@ const dijkstraVoraz = {
   },
 
   encontrarRutaVoraz(inicio, fin) {
+    //Iniciamos de variables
     let nodo = inicio, ruta = [inicio], distancia = 0, visitados = new Set();
 
+    // Bucle principal
     while (nodo !== fin) {
       let distMinima = Infinity, siguiente = null;
 
+      // Marcar nodo actual como visitado
       visitados.add(nodo);
+
+      // Iterar sobre los vecinos del nodo actual
       for (const vecino in this.grafo[nodo]) {
+
+        // Verificar si el vecino no ha sido visitado y no está en la ruta actual
         if (!visitados.has(vecino) && !ruta.includes(vecino)) {
+
+          // Actualizar la distancia mínima y el siguiente nodo si es necesario
           if (this.grafo[nodo][vecino] < distMinima) {
             distMinima = this.grafo[nodo][vecino];
             siguiente = vecino;
@@ -25,6 +34,7 @@ const dijkstraVoraz = {
         }
       }
 
+      // Si no hay siguiente nodo válido, retornar una ruta vacía y distancia infinita
       if (siguiente === null) return { ruta: [], distancia: Infinity };
 
       ruta.push(siguiente);
@@ -32,6 +42,7 @@ const dijkstraVoraz = {
       nodo = siguiente;
     }
 
+    // Retornar la ruta y la distancia encontradas
     return { ruta, distancia };
   }
 };
@@ -41,8 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   formularioDijkstra.addEventListener("submit", (event) => {
     event.preventDefault();
-    const inicio = document.getElementById("startNode").value,
-          end = document.getElementById("endNode").value,
+    const inicio = document.getElementById("inicioNodo").value,
+          end = document.getElementById("finNodo").value,
           { ruta, distancia } = dijkstraVoraz.encontrarRutaVoraz(inicio, end),
           resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `Ruta más eficiente: ${ruta.join(" -> ")} <br> Total distancia: ${distancia}`;

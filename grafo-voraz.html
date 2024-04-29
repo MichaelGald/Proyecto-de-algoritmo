@@ -65,7 +65,7 @@
             <h6>
                 Html:
             </h6>
-            <pre class="col-lg-12 rounded-2 bg-dark text-light">
+            <pre class="col-lg-8 rounded-2 bg-dark text-light">
                 <code>
                     &lt;svg width="100%" height="100%" style="position:absolute;top:0;left:0;"&gt;
                     &lt;line class="linea" x1="50px" y1="200px" x2="250px" y2="50px"/&gt;
@@ -82,7 +82,80 @@
                 En nuestro caso solo utilizamos la etiqueda line y text, line se uso para unir los nodos de una menera con cordenadas
                 ya que algunos nodos no estaban conectados, text se utilizó para mostrar las distancias entre nodos.
             </p>            
+            <h6>JS:</h6>
+            <pre class="col-lg-8 rounded-2 bg-dark text-light text-justify"><code>
+                encontrarRutaVoraz(inicio, fin) {
+                    //Iniciamos de variables
+                    let nodo = inicio, ruta = [inicio], distancia = 0, visitados = new Set();
                 
+                    // Bucle principal
+                    while (nodo !== fin) {
+                      let distMinima = Infinity, siguiente = null;
+                
+                      // Marcar nodo actual como visitado
+                      visitados.add(nodo);
+                
+                      // Iterar sobre los vecinos del nodo actual
+                      for (const vecino in this.grafo[nodo]) {
+                
+                        // Verificar si el vecino no ha sido visitado y no está en la ruta actual
+                        if (!visitados.has(vecino) && !ruta.includes(vecino)) {
+                
+                          // Actualizar la distancia mínima y el siguiente nodo si es necesario
+                          if (this.grafo[nodo][vecino] < distMinima) {
+                            distMinima = this.grafo[nodo][vecino];
+                            siguiente = vecino;
+                          }
+                        }
+                      }
+                
+                      // Si no hay siguiente nodo válido, retornar una ruta vacía y distancia infinita
+                      if (siguiente === null) return { ruta: [], distancia: Infinity };
+                
+                      ruta.push(siguiente);
+                      distancia += distMinima;
+                      nodo = siguiente;
+                    }
+                
+                    // Retornar la ruta y la distancia encontradas
+                    return { ruta, distancia };
+                  }
+            </code></pre>
+            <p>En el JavaScrip tenemos varios funciones para poder encontrar la ruta mas rapida, empesamos con el ciclo while
+                <strong>while (nodo !== fin)</strong>, donde nodo es el nodo actual, fin es el nodo de destino, donde wl ciclo continua hasta que el nodo 
+                sea el mismo que el de destino.
+                Luego hacemos inicializacion de todas la variables, donde tenenos la distancia minima, donde guardaremos el siguiente nodo donde 
+                se esta visitando.
+
+                Luego agregamos el nodo de inicio al nodo de visitados, para ir verificando por donde hemos pasado.
+            </p>
+            <p>En esta linea tuve un problema a la hora de poder iterar, <strong>for (const vecino in this.grafo[nodo])</strong>
+                ya que tenia el problema para poder iterar sobre el objeto de grafos donde guardo la distancia entre cada nodos
+                y el nodo actual. con este ciclo logramos tomar esos datos.
+            </p>
+            <p>
+                <strong>if (!visitados.has(vecino) && !ruta.includes(vecino))</strong>, Se verifica si el vecino actual no ha sido visitado y no 
+                    está en la ruta actual. Esto asegura que no se visiten nodos ya visitados o que ya estén en la ruta.
+            </p>
+            <p>
+                <strong>if (this.grafo[nodo][vecino] < distMinima) </strong>
+                Se verifica si la distancia desde el nodo actual hasta el vecino actual es menor que 
+                    la distancia mínima encontrada hasta ahora.
+            </p>
+            <p>
+                <pre class="col-lg-8 rounded-2 bg-dark text-light">
+                    <code>
+                        const formularioDijkstra = document.getElementById("dijkstraForm");
+                    </code>
+                </pre>
+                En esta Linea creamos estamos accediendo a los datos del formulario, en donde cuando presionemos calcular, se creara un evento enviar 
+                el formulario.
+            </p>
+            <h4>Ejemplo del algoritmo</h4>
+            <p>Instrucciones</p>
+            <li>Seleccione el nodo inicial</li>
+            <li>Seleccione el nodo final</li>
+            <li>Presione en Calcular</li>
         </div>
     </div>
     <div class="row m-5">
@@ -159,19 +232,19 @@
           </a>
         </div>
         <div class="col-md-4">
-            <h3>tittle</h3>
-            <p class="m-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptatem 
-                doloremque laudantium, dolorum necessitatibus expedita sed optio, similique suscipit 
-                totam consequuntur ab culpa impedit, enim possimus! Porro, non ad.</p> 
+            <h3>Algoritmo disjktra Voraz</h3>
+            <p class="m-4">Este Grafo fue construido de forma Vozaz, siemper busca el camino mas corto en ese momento,
+                sin importar si al final el camino es mas largo.
+            </p> 
         </div>
     </div>
-    <div class="row m-5">
+    <div class="row m-2">
         <div class="col-md-6 offset-md-3">
             <form id="dijkstraForm" class="mt-4">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="startNode" class="form-label">Nodo de inicio:</label>
-                        <select id="startNode" class="form-select">
+                        <label for="inicioNodo" class="form-label">Nodo de inicio:</label>
+                        <select id="inicioNodo" class="form-select">
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
@@ -182,8 +255,8 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="endNode" class="form-label">Nodo de destino:</label>
-                        <select id="endNode" class="form-select">
+                        <label for="finNodo" class="form-label">Nodo de destino:</label>
+                        <select id="finNodo" class="form-select">
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
@@ -201,7 +274,7 @@
                 </div>
             </form>
         </div>
-        <div class="row text-center m-4">
+        <div class="row text-center mb-4">
             <div id="result"></div>
         </div>
     </div>
