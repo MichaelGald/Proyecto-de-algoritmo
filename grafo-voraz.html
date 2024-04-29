@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmo Moneda</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="bootstrap-5.3/css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a href="" class="navbar-brand text-info fw-semibold fs-4">Algoritmo Voraces</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+        <span class="navbar-toggler-icon"></span>
+      </button> 
+          <section class="offcanvas offcanvas-start" id="menuLateral" tabindex="-1" style="background-color: #1e293b">
+              <div class="offcanvas-header" data-bs-theme="dark">
+                  <h5 class="offcanvas-title text-info">Algoritmo Voraces</h5>
+                  <button class="btn-close" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+                </button>
+
+              </div>
+              <div class="offcanvas-body d-flex flex-column justify-content-between px-0 color-principal">
+                  <ul class="navbar-nav fs-7 justify-content-evenly">
+                      <li class="nav-item p-3 py-md-1"><a href="index.html" class="nav-link">Inicio</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algotimomoneda.html" class="nav-link">Algoritmo Moneda</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo knapsack problem</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo job scheduling</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo set covering</a></li>
+  
+                  </ul>
+              </div>
+          </section>
+      </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <h1 class="m-4">Algoritmo voraz de disjktra</h1>          
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>El algoritmo de Dijkstra solucionado de una manera voraz, básicamente inicia en el nodo que escojas 
+                (el nodo de origen) y analiza los nodos cercanos buscando el camino mas corto en ese moemento.
+                Este algoritmo se podria llegar a confundir con un algoritmo dinamico, pero en muchos casos el algoritmo 
+                no encuentra la ruta mas rapida, un ejemplo puede ser al elegir al nodo incial como el nodo A, 
+                luego elegimos el nodo B, como observamos el algoritmo nos dice como llegar hasta este nodo 
+                ( A -> C -> G -> B) con una distancia recorrida de 15, cuando si nos 
+                hubieramos ido por el camino  (A -> C -> B), la suma de camino recorrido hubiera sido 13, ahi esta un ejemplo 
+                claro del la diferencia entre un algoritmo dinamico y uno voraz.
+            </p>
+            <h4>
+                Elementos
+            </h4>
+            <p>
+                A continuación se les hablará de algunos elementos que se usaron en la elaboración para el funcionamiento de
+                este proyecto.
+            
+            </p>
+            <h6>
+                Html:
+            </h6>
+            <pre class="col-lg-12 rounded-2 bg-dark text-light">
+                <code>
+                    &lt;svg width="100%" height="100%" style="position:absolute;top:0;left:0;"&gt;
+                    &lt;line class="linea" x1="50px" y1="200px" x2="250px" y2="50px"/&gt;
+                    &lt;text x="150px" y="140px" fill="black">20&lt;/text&gt;
+                    &lt/svg&gt;
+                </code>
+            </pre>
+            <p>
+                En el HTML se utilizó una herramienta llamada SVG, o Scalable Vector Graphics (Gráficos Vectoriales Escalables),
+                es un formato de imagen basado en XML para describir gráficos bidimensionales. A diferencia de los formatos
+                de imagen rasterizados (como JPEG o PNG), que almacenan información de píxeles, los gráficos SVG describen los
+                elementos gráficos como formas geométricas y texto.
+
+                En nuestro caso solo utilizamos la etiqueda line y text, line se uso para unir los nodos de una menera con cordenadas
+                ya que algunos nodos no estaban conectados, text se utilizó para mostrar las distancias entre nodos.
+            </p>            
+                
+        </div>
+    </div>
+    <div class="row m-5">
+        <div id="circulos" class="col-md-8 min-height position-relative min-heigth">
+            <svg width="100%" height="100%" style="position:absolute;top:0;left:0;">
+                <line class="linea" x1="50px" y1="200px" x2="250px" y2="50px"/>
+                <line class="linea" x1="250px" y1="50px" x2="400px" y2="50px"/>
+                <line class="linea" x1="430px" y1="350px" x2="250px" y2="50px"/>
+                <line class="linea" x1="250" y1="350px" x2="430px" y2="50px"/>
+                <line class="linea" x1="50px" y1="200px" x2="250px" y2="350px"/>
+                <line class="linea" x1="430px" y1="350px" x2="250px" y2="350px"/>
+                <line class="linea" x1="240px" y1="300px" x2="240px" y2="50px"/>
+                <line class="linea" x1="430px" y1="300px" x2="430px" y2="50px"/>
+                <line class="linea" x1="430px" y1="50px" x2="600px" y2="190px"/>
+                <line class="linea" x1="430px" y1="350px" x2="600px" y2="190px"/>
+
+                <text x="150px" y="140px" fill="black">20</text>
+                <text x="320px" y="40px" fill="black">10</text>
+                <text x="130px" y="290px" fill="black">5</text>
+                <text x="270px" y="130px" fill="black">3</text>
+                <text x="360px" y="290px" fill="black">12</text>
+                <text x="360px" y="130px" fill="black">25</text>
+                <text x="220px" y="200px" fill="black">8</text>
+                <text x="280px" y="270px" fill="black">7</text>
+                <text x="320px" y="340px" fill="black">11</text>
+                <text x="400px" y="200px" fill="black">15</text>
+                <text x="400px" y="320px" fill="black">20</text>
+                <text x="525px" y="280px" fill="black">14</text>
+                <text x="525px" y="110px" fill="black">9</text>
+                
+            </svg>
+            
+            
+          <a href="">
+            <div id="circulo1" class="circulo">
+                A
+              </div>
+          </a>
+       
+          <a href="">
+            <div id="circulo2" class="circulo">
+                B
+              </div>
+          </a>
+
+          <a href="">
+            <div id="circulo3" class="circulo">
+                C
+              </div>
+          </a>
+
+          <a href="">
+            <div id="circulo4" class="circulo">
+                D
+              </div>
+          </a>
+
+          <a href="">
+            <div id="circulo5" class="circulo">
+                E
+              </div>
+          </a>
+
+          <a href="">
+            <div id="circulo6" class="circulo">
+                F
+              </div>
+          </a>
+
+          <a href="">
+            <div id="circulo7" class="circulo">
+                G
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+            <h3>tittle</h3>
+            <p class="m-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptatem 
+                doloremque laudantium, dolorum necessitatibus expedita sed optio, similique suscipit 
+                totam consequuntur ab culpa impedit, enim possimus! Porro, non ad.</p> 
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="col-md-6 offset-md-3">
+            <form id="dijkstraForm" class="mt-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="startNode" class="form-label">Nodo de inicio:</label>
+                        <select id="startNode" class="form-select">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="endNode" class="form-label">Nodo de destino:</label>
+                        <select id="endNode" class="form-select">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary">Calcular</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row text-center m-4">
+            <div id="result"></div>
+        </div>
+    </div>
+</div>
+<footer class="color-principal" id="tempaltemo_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-white border-bottom pb-3 border-light logo">Algoritmos Voraces</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                    <li>
+                        Algoritmo de moneda
+                    </li>
+                    <li>
+                        Algoritmo de mochila
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Integrantes</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                    <li>Jeison Omar Arita</li>
+                    <li>Michael Andrey Galdamez</li>
+                </ul>
+            </div>
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Contactanos</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                    <li>jeison.arita@unah.hn</li>
+                    <li>mgaldamezm@unah.hn</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="bootstrap-5.3/js/bootstrap.min.js"></script>
+    <script src="/js/grafo-voraz.js"></script>
+</body>
+</html>
