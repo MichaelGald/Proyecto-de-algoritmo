@@ -26,9 +26,9 @@
                   <ul class="navbar-nav fs-7 justify-content-evenly">
                       <li class="nav-item p-3 py-md-1"><a href="index.html" class="nav-link">Inicio</a></li>
                       <li class="nav-item p-3 py-md-1"><a href="algotimomoneda.html" class="nav-link">Algoritmo Moneda</a></li>
-                      <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo knapsack problem</a></li>
-                      <li class="nav-item p-3 py-md-1"><a href="algoritmoprogramacion.html" class="nav-link">Algoritmo job scheduling</a></li>
-                      <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo set covering</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo Knapsack Problem</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algoritmoprogramacion.html" class="nav-link">Algoritmo Job Scheduling</a></li>
+                      <li class="nav-item p-3 py-md-1"><a href="algoritmo-disjktra.html" class="nav-link">Algoritmo Disjktra</a></li>
   
                   </ul>
               </div>
@@ -75,17 +75,17 @@
             </p>
 
             <pre class="col-lg-5 rounded-2 bg-dark text-light text-justify"><code>
-                    class Actividad {
-                        constructor(id, inicio, fin) {
-                            this.id = id;
-                            this.inicio = inicio;
-                            this.fin = fin;
-                            this.asignada = false; 
-                        }   
-                        calcularDuracion() {
-                            return this.fin - this.inicio;
-                        }
-                    }
+ class Actividad {
+    constructor(id, inicio, fin) {
+       this.id = id;
+        this.inicio = inicio;
+        this.fin = fin;
+        this.asignada = false; 
+    }   
+    calcularDuracion() {
+        return this.fin - this.inicio;
+    }
+ }
             </code></pre>
             <p class="text-justify">
                 <strong>Clase Actividad:</strong> Define una clase llamada Actividad que representa una 
@@ -94,7 +94,7 @@
                 el tiempo de inicio del tiempo de fin.
               </p>
             <pre class="col-lg-8 rounded-2 bg-dark text-light text-justify"><code>    
-function asignarActividades(actividades, numTrabajadores) {               
+ function asignarActividades(actividades, numTrabajadores) {               
     actividades.sort((a, b) => a.inicio - b.inicio);
     const asignaciones = [];
     const horasAsignadas = new Array(numTrabajadores).fill(0);
@@ -131,7 +131,7 @@ function asignarActividades(actividades, numTrabajadores) {
     });
             
     return asignaciones;
-}
+ }
                             
 function identificarActividadesNoAsignadas(actividades, asignaciones) {
     const actividadesNoAsignadas = [];            
@@ -256,7 +256,13 @@ function identificarActividadesNoAsignadas(actividades, asignaciones) {
                             Algoritmo de moneda
                         </li>
                         <li>
-                            Algoritmo de mochila
+                            Algoritmo Knapsack Problem
+                        </li>
+                        <li>
+                            Algoritmo Job Scheduling
+                        </li>
+                        <li>
+                            Algoritmo disjktra
                         </li>
                     </ul>
                 </div>

@@ -26,47 +26,72 @@
                       <ul class="navbar-nav fs-7 justify-content-evenly">
                           <li class="nav-item p-3 py-md-1"><a href="index.html" class="nav-link">Inicio</a></li>
                           <li class="nav-item p-3 py-md-1"><a href="algotimomoneda.html" class="nav-link">Algoritmo Moneda</a></li>
-                          <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo knapsack problem</a></li>
-                          <li class="nav-item p-3 py-md-1"><a href="algoritmoprogramacion.html" class="nav-link">Algoritmo job scheduling</a></li>
-                          <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">Algoritmo set covering</a></li>
-      
+                          <li class="nav-item p-3 py-md-1"><a href="algoritmomochila.html" class="nav-link">Algoritmo Knapsack Problem</a></li>
+                          <li class="nav-item p-3 py-md-1"><a href="algoritmoprogramacion.html" class="nav-link">Algoritmo Job Scheduling</a></li>
+                          <li class="nav-item p-3 py-md-1"><a href="algoritmo-disjktra.html" class="nav-link">Algoritmo Disjktra</a></li>
                       </ul>
                   </div>
               </section>
           </div>
     </nav>
-    <div class="row mt-3 mb-1">
+    <div class="row mt- mb-1">
         <!-- Fin del bloque izquierdo -->
         <main class="container col-10">
             <div class="row">
                 <div class="col-12 p-4 ">
                      <!-- bloque 1 -->
-                    <section class="mb-4">
-                        <h1 class="mb-2">¿Que es un algoritmo voraz?</h1>
+                    <section class="mb-4 mt-4 ">
+                        <h1 class="mb-2 mt-1">Algoritmo voraz</h1>
                         <hr>
-                        <p>
+                        <h2 class="mb-2 mt-1 ">¿Que es un algoritmo voraz?</h2>
+                        <p class="text-justify">
                             En ciencias de la computación, un algoritmo voraz (también conocido como goloso, ávido, devorador o greedy) 
                             es una estrategia de búsqueda por la cual se sigue una heurística consistente en elegir la opción óptima en 
                             cada paso local con la esperanza de llegar a una solución general óptima. Este esquema algorítmico es el que
                             menos dificultades plantea a la hora de diseñar y comprobar su funcionamiento. Normalmente se aplica a los 
                             problemas de optimización.
                         </p>
+                        <img src="img/image-index.jpg" alt="2 personas observando un gran problema">
+                    </section>
+                    <section>
+                        <h2 class="mb-2 mt-1 ">¿Como funciona los algoritmo voraz?</h2>
+                        <p class="text-justify">
+                            El funcionamiento de un algoritmo voraz se puede dividir en varios pasos:
+                            <ul><strong>Inicialización:</strong> Comienza con una solución parcial inicial.</ul>
+                            <ul><strong>Selección de la mejor opción local:</strong> En cada paso, elige la opción óptima localmente.</ul>
+                            <ul><strong>Actualización de la solución parcial:</strong> Incorpora la opción seleccionada a la solución parcial.</ul>
+                            <ul><strong>Verificación de la condición de parada:</strong> Continúa iterando hasta que se cumple alguna condición de parada.</ul>
+                            <ul><strong>Retorno de la solución final:</strong> Devuelve la solución obtenida, que puede o no ser óptima.</ul>
+                        </p>
                     </section>
                     <!--bloque 2  -->
                     <section class="mt-4">
                         <h2 class="mb-2 mt-4">Ventajas y desventajas</h2>
-                        <hr>
-                        <h3 class="mb-1 mt-1">Ventajas</h3>
-                        <p> Son faciles de implementar </p>
-                        <p> Producen soluciones eficientes </p>
-                        <p> A veces encuentran la solucion optima  </p>
+                        <p class="text-justify">A continuación se mostrarán las ventajas y desventajas de los algoritmos voraces:</p>
+                        <h4 class="mb-1 mt-1">Ventajas</h4>
+                        <p class="text-justify"> Son faciles de implementar </p>
+                        <p class="text-justify"> Producen soluciones eficientes </p>
+                        <p class="text-justify"> A veces encuentran la solucion optima  </p>
                         <h4 class="mb-1 mt-1">Desventajas</h4>
-                        <p> No todos los problemas de optimizacion son resolubles con algoritmos
+                        <p class="text-justify"> No todos los problemas de optimizacion son resolubles con algoritmos
                             voraces </p>
-                        <p> La busqueda de un optimo local no implica encontrar un optimo global </p>
-                        <p> Dificultad de encontrar la funcion de seleccion que garantice la eleccion
+                        <p class="text-justify"> La busqueda de un optimo local no implica encontrar un optimo global </p>
+                        <p class="text-justify"> Dificultad de encontrar la funcion de seleccion que garantice la eleccion
                             optima</p> 
-                    </section>  
+                    </section> 
+                    
+                    <section>
+                        <h2 class="mb-2 mt-4 ">Tipos de algoritmo voraces</h2>
+                        <p class="text-justify">En este apartado mostramos los tipos de algoritmos voraces:
+                            <ul>Algoritmo Moneda</ul>
+                            <ul>Algoritmo knapsack problem</ul>
+                            <ul>Algoritmo Job Scheduling</ul>
+                            <ul>Algoritmo Disjktra</ul>
+                        </p>
+                        <p class="text-justify">
+                            Explora cada uno de estos algoritmos para comprender cómo funcionan y cómo pueden aplicarse a diferentes problemas de optimización.
+                        </p>
+                    </section> 
                 </div>          
             </div>
         </main>
@@ -81,7 +106,13 @@
                             Algoritmo de moneda
                         </li>
                         <li>
-                            Algoritmo de mochila
+                            Algoritmo Knapsack Problem
+                        </li>
+                        <li>
+                            Algoritmo Job Scheduling
+                        </li>
+                        <li>
+                            Algoritmo disjktra
                         </li>
                     </ul>
                 </div>
