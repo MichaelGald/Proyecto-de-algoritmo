@@ -53,9 +53,15 @@ document.addEventListener("DOMContentLoaded", () => {
   formularioDijkstra.addEventListener("submit", (event) => {
     event.preventDefault();
     const inicio = document.getElementById("inicioNodo").value,
-          end = document.getElementById("finNodo").value,
-          { ruta, distancia } = dijkstraVoraz.encontrarRutaVoraz(inicio, end),
-          resultDiv = document.getElementById("result");
+          final = document.getElementById("finNodo").value;
+    // Llama al método para encontrar la ruta más corta usando el algoritmo de Dijkstra
+    const resultadoDijkstra = dijkstraVoraz.encontrarRutaVoraz(inicio, final);
+
+    // Extrae la ruta y la distancia del resultado usando destructuring
+    const ruta = resultadoDijkstra.ruta;
+    const distancia = resultadoDijkstra.distancia;
+
+    const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `Ruta más eficiente: ${ruta.join(" -> ")} <br> Total distancia: ${distancia}`;
   });
 });
