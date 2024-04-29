@@ -1,8 +1,3 @@
-/*
-Falta limpiar los datos del cambio al dar click en el btn y agregar un nuevo valor
-agregar contenido
-*/
-
 const presionarBtn = document.querySelector('#calcularCambio');
 const montoInput = document.getElementById("monto");
 const resultadoDiv = document.getElementById("resultado");
@@ -52,7 +47,6 @@ function calcularCambio() {
                 }
             }
         };
-
         mostrarCambio();
     }else{
         alert('El valor ingresado debe ser mayor a cero');
@@ -60,18 +54,14 @@ function calcularCambio() {
 
     
 }
-
 function mostrarCambio() {
     // Objeto para almacenar el conteo de cada valor
     const conteo = {};
-
     // Contar la frecuencia de cada valor en monedasSeleccionadas
     monedasSeleccionadas.forEach(monedas => {
         conteo[monedas] = (conteo[monedas] || 0) + 1;
     });
-
     const listaHTML = Object.entries(conteo).map(([valor, cantidad]) => `<li>Se entrega ${cantidad} Monedas de denominacion ${valor}</li>`).join('');
-
     // Mostrar la lista en el HTML
     resultadoDiv.innerHTML = `
     <p>Cantidad mínima de monedas: ${monedasSeleccionadas.length}</p>
